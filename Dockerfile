@@ -1,9 +1,9 @@
 FROM debian:latest
 
-#  $ docker build . -t continuumio/anaconda3:latest -t continuumio/anaconda3:5.3.0
-#  $ docker run --rm -it continuumio/anaconda3:latest /bin/bash
-#  $ docker push continuumio/anaconda3:latest
-#  $ docker push continuumio/anaconda3:5.3.0
+# based on continuumio/anaconda3
+# docker build . -t samisaf/pyre:latest
+# docker run --rm -ti samisaf/pyre:latest
+# docker push samisaf/pyre:latest
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
@@ -27,12 +27,14 @@ RUN apt-get install -y curl grep sed dpkg && \
     rm tini.deb && \
     apt-get clean
 
+# Add R kernel to jupyter notebook
 RUN conda install keras r-base r-repr r-IRdisplay r-IRkernel
 
 RUN R -e 'IRkernel::installspec(user = FALSE)'
 
 RUN cp -r /usr/local/share/jupyter/kernels/ir /opt/conda/share/jupyter/
 
+# Generate Jupyter notebook config file
 RUN jupyter notebook --generate-config
 
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
