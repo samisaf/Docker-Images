@@ -1,7 +1,7 @@
 FROM debian:latest
 
 # based on continuumio/anaconda3
-# docker build . -t samisaf/pyre:latest
+# docker build -t samisaf/pyre:latest .
 # docker run --rm -ti samisaf/pyre:latest
 # docker push samisaf/pyre:latest
 
@@ -28,7 +28,7 @@ RUN apt-get install -y curl grep sed dpkg && \
     apt-get clean
 
 # Add R kernel to jupyter notebook
-RUN conda install keras r-base r-repr r-IRdisplay r-IRkernel
+RUN conda install keras r-base r-repr r-IRdisplay r-IRkernel r-tidyverse
 
 RUN R -e 'IRkernel::installspec(user = FALSE)'
 
