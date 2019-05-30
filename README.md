@@ -1,0 +1,1 @@
+This is a data science docker image based on [Anaconda3](https://hub.docker.com/r/continuumio/anaconda/). It adds keras, R, as well as the R kernell for jupyter notebooks.
