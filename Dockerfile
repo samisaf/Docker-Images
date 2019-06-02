@@ -22,5 +22,9 @@ RUN apt-get install -y htop
 # Generate Jupyter notebook config file
 RUN jupyter notebook --generate-config
 
+# Adds code server
+RUN wget https://github.com/cdr/code-server/releases/download/1.1119-vsc1.33.1/code-server1.1119-vsc1.33.1-linux-x64.tar.gz \ 
+    && tar -xf code-server1.1119-vsc1.33.1-linux-x64.tar.gz && cp -r ./code-server1.1119-vsc1.33.1-linux-x64/code-server /opt/
+    
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]
