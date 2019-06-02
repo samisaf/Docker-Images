@@ -11,6 +11,6 @@ CONFIGFILE=/root/.jupyter/jupyter_notebook_config.py
 KAGGLE_USERNAME=mykagglename
 KAGGLE_KEY=mykagglepasswd
 
-sudo docker run --name samisaf --rm -d -p $PORT:$PORT -v $DIRSRC:$DIRDST -v $DIRKEY:$DIRKEY -e KAGGLE_USERNAME=$KAGGLE_USERNAME -e KAGGLE_KEY=$KAGGLE_KEY \
+sudo docker run --name awsomepy --rm -d -p $PORT:$PORT -v $DIRSRC:$DIRDST -v $DIRKEY:$DIRKEY -e KAGGLE_USERNAME=$KAGGLE_USERNAME -e KAGGLE_KEY=$KAGGLE_KEY \
 	samisaf/pyre bash -c "echo $PASS >> $CONFIGFILE && $CONDAPATH/jupyter lab --port=$PORT --ip=0.0.0.0 --notebook-dir=$DIRDST --no-browser --allow-root --certfile=$CERT --keyfile=$PKEY"
 
