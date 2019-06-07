@@ -17,7 +17,8 @@ RUN conda update --all
 RUN pip install kaggle 
 
 # Add Julia, and Julia kernel
-RUN apt-get install -y htop julia
+RUN apt-get install -y htop
+RUN conda install -c conda-forge julia 
 RUN JUPYTER=$(which jupyter) 
 RUN julia -E "Pkg.status();Pkg.add("IJulia")"
 
