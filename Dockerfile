@@ -20,14 +20,15 @@ RUN pip install kaggle
 RUN apt-get install -y htop
 RUN conda install -c conda-forge julia 
 RUN JUPYTER=$(which jupyter) 
-RUN echo "using Pkg;Pkg.status();Pkg.add("IJulia")" > ij.jl && julia ij.jl && rm ij.jl
+RUN julia -E "using Pkg;Pkg.status();Pkg.add(\"IJulia\")"
 
 # Generate Jupyter notebook config file
 RUN jupyter notebook --generate-config
 
 # Adds code server
 RUN wget https://github.com/cdr/code-server/releases/download/1.1119-vsc1.33.1/code-server1.1119-vsc1.33.1-linux-x64.tar.gz \ 
-    && tar -xf code-server1.1119-vsc1.33.1-linux-x64.tar.gz && cp -r ./code-server1.1119-vsc1.33.1-linux-x64/code-server /opt/
+    && tar -xf code-server1.1119-vsc1.33.1-linux-x64.tar.gz && cp -r ./code-server1.1119-vsc1.33.1-linux-x64/code-server /opt/ \
+    && rm code-server1.1119*
     
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]
