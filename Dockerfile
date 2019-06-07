@@ -20,7 +20,7 @@ RUN pip install kaggle
 RUN apt-get install -y htop
 RUN conda install -c conda-forge julia 
 RUN JUPYTER=$(which jupyter) 
-RUN julia -E "Pkg.status();Pkg.add("IJulia")"
+#RUN julia -E "using Pkg;Pkg.status();Pkg.add("IJulia")"
 
 # Generate Jupyter notebook config file
 RUN jupyter notebook --generate-config
