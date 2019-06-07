@@ -16,8 +16,10 @@ RUN conda install keras
 RUN conda update --all
 RUN pip install kaggle 
 
-# Additional applications
-RUN apt-get install -y htop
+# Add Julia, and Julia kernel
+RUN apt-get install -y htop julia
+RUN JUPYTER=$(which jupyter) 
+RUN julia -E "Pkg.status();Pkg.add("IJulia")"
 
 # Generate Jupyter notebook config file
 RUN jupyter notebook --generate-config
