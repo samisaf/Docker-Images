@@ -22,6 +22,10 @@ RUN conda install -c conda-forge julia
 RUN JUPYTER=$(which jupyter) 
 RUN julia -E "using Pkg;Pkg.status();Pkg.add(\"IJulia\")"
 
+# Add Octave kernel
+RUN apt-get install -y octave
+RUN conda install -c conda-forge octave_kernel texinfo
+
 # Generate Jupyter notebook config file
 RUN jupyter notebook --generate-config
 
